@@ -43,4 +43,4 @@ Google Trends scraper with Pyautogui, made for lessening my pain the next time I
 <p>Congrats on installing and learning how to use my application. Once you've done your first search, Trendalyzer will create a folder at C:\Users\*Your Name*\trendalyzer_results. This folder will contain
 all your results. Finally, if you encouter any bugs or errors in the program, or have a suggestion, feel free to reach out to me and report it in the "Issues" section on Github. Enjoy :)</p>
 
-<p>Still confused? Watch the youtube video: Coming soon</p>
+<p>Still confused? Watch the youtube video: <a href=https://www.youtube.com/watch?v=SiQ79CoLlv8>Video</a> (Kinda slow, so watch it at 1.5x or 2x speed)</p>
