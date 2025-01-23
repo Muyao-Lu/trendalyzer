@@ -1,13 +1,22 @@
 # trendalyzer
-Google Trends analysis with Pyautogui
+Google Trends analysis with Pyautogui, made for lessening my pain the next time I have to gather a buttload of data for some math modelling contest.
 
 <h1>Useage Instructions</h1>
 
 <h2>Download instructions</h2>
+<h3>Zip/Executable</h3>
 <ol>
   <li>Download the latest release of Trendalyzer <a href=https://github.com/Muyao-Lu/trendalyzer/releases/>here</a></li>
   <li>Unpack the .zip file in a location of your choice</li>
   <li>Enter into folder created, and run main.exe by double clicking on it</li>
+</ol>
+
+<h3>Python code (Assuming you already have python, pip)</h3>
+<ol>
+  <li>Type this command into Git Bash: <code>git clone https://github.com/Muyao-Lu/trendalyzer</code>, or manually download all files. (You can do that <a href=https://github.com/Muyao-Lu/trendalyzer/releases/>here</a> by clicking on the "source code" option)</li>
+  <li>Unpack the .zip file in a location of your choice</li>
+  <li>Install all requirements in requirements.txt</li>
+  <li>Run main.py</li>
 </ol>
 
 <h2>Useage Instructions</h2>
@@ -15,12 +24,12 @@ Google Trends analysis with Pyautogui
 <ol>
   <li>
     <h3>The Queries:</h3>
-    <p>Key to each search, the queries are what keywords Trendalyzer will be searching for. Whether it's a list of Olympic sports, Web browsers (it's <i>Google</i> trends though, so maybe not the best idea), or           even numbers from 1 to 25 inclusive (did a <i>lot</i> of that while testing), they are the keywords that you want analyzed. Simply add a query by clicking on the big grey button with the "+" sign, or remove        one
+    <p>Key to each search, the queries are what keywords Trendalyzer will be searching for. Whether it's a list of Olympic sports, Web browsers (it's <i>Google</i> trends though, so maybe not the best idea), or           even numbers from 1 to 25 inclusive (did a <i>lot</i> of that while testing), simply add a query by clicking on the big grey button with the "+" sign, or remove        one
        by clicking on it in the "queries" gutter. Unlike vanilla Google Trends, Trendalyzer will allow you to compare as many queries as your heart desires. Yep, no more labouring away, doing 5 queries at a time,         and compiling all of them to a final document. Aren't you so happy :)</p>
   </li>
   <li>
     <h3>The Timeframe:</h3>
-    <p>Another essential part of every search, the timeframe is well ... the timeframe (Someone, help me). After all, no one wants data from 2004 (ewwwww) on their sparkly presentation on the popularity of TikTok vs Reddit. Neither existed invented in 2004! (Not a factorial symbol) By using the timeframe feature, however, you'll be able to constrain the data just to after both were invented, so you get a nice, clean presentation. Yippee!</p>
+    <p>Another essential part of every search, the timeframe is well ... the timeframe (Someone, help me). After all, no one wants data from 2004 (ewwwww) on their sparkly presentation on the popularity of TikTok vs Reddit. Neither existed in 2004! (Not a factorial symbol) By using the timeframe feature, however, you'll be able to constrain the data just to after both were invented, so you get a nice, clean presentation. Yippee!</p>
   </li>
   <li>
     <h3>The Region, Search type, and Search category:</h3>
