@@ -23,7 +23,8 @@ total_downloads: int = 0
 
 def setup(targets_list: list, start_date: str, end_date: str, search_data: dict) -> None:
     global targets, names, name_map, last_query, total_downloads, date, search_type, search_category, country
-    targets = targets_list
+    targets = targets_list[:]
+    # print(targets, targets_list)
     names = [str(i) for i in range(ceil(len(targets)/5))]
     name_map = {}
     last_query = ""
@@ -215,14 +216,13 @@ def compile_final(files: int):
         home_dir = os.path.expanduser('~')
         while os.path.isfile(home_dir + "\\trendalyzer_results\\results{i}.xlsx".format(i=i)):
             i += 1
-            print(i)
+
         else:
             os.rename("results.xlsx", home_dir + "\\trendalyzer_results\\results{i}.xlsx".format(i=i))
     except FileNotFoundError:
         os.makedirs(os.path.expanduser('~') + "\\trendalyzer_results\\")
         while os.path.isfile(home_dir + "\\trendalyzer_results\\results{i}.xlsx".format(i=i)):
             i += 1
-            print(i)
         else:
             os.rename("results.xlsx", home_dir + "\\trendalyzer_results\\results{i}.xlsx".format(i=i))
     return os.path.expanduser('~') + "\\trendalyzer_results"
