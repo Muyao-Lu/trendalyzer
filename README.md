@@ -1,5 +1,5 @@
 # trendalyzer
-Google Trends analysis with Pyautogui, made for lessening my pain the next time I have to gather a buttload of data for some math modelling contest.
+Google Trends scraper with Pyautogui, made for lessening my pain the next time I have to gather a buttload of data for some math modelling contest.
 
 <h1>Useage Instructions</h1>
 
