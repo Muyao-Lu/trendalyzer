@@ -45,4 +45,4 @@ all your results. Finally, if you encouter any bugs or errors in the program, or
 
 <hr>
 
-<p>Still confused? Watch the youtube video: <a href=https://www.youtube.com/watch?v=SiQ79CoLlv8(https://www.youtube.com/watch?v=7JpeIn6vjLk)>Video</a></p>
+<p>Still confused? Watch the youtube video: <a href=https://www.youtube.com/watch?v=7JpeIn6vjLk>Video</a></p>
