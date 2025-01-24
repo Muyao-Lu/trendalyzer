@@ -7,6 +7,7 @@ import glob, os, time
 import pandas as pd
 
 from pyscreeze import Box
+from multiprocessing import Process
 
 targets = []
 names = []
@@ -20,11 +21,11 @@ search_type = ""
 search_category = ""
 
 total_downloads: int = 0
+last_download = ""
 
 def setup(targets_list: list, start_date: str, end_date: str, search_data: dict) -> None:
-    global targets, names, name_map, last_query, total_downloads, date, search_type, search_category, country
+    global targets, names, name_map, last_query, total_downloads, date, search_type, search_category, country, last_download
     targets = targets_list[:]
-    # print(targets, targets_list)
     names = [str(i) for i in range(ceil(len(targets)/5))]
     name_map = {}
     last_query = ""
@@ -35,6 +36,15 @@ def setup(targets_list: list, start_date: str, end_date: str, search_data: dict)
     date = start_date + "%20" + end_date
 
     total_downloads = 0
+
+    home = os.path.expanduser('~')
+    download_location = os.path.join(home, 'Downloads')
+
+    path = download_location + "\\*.csv"
+    try:
+        last_download = max(glob.glob(path), key=os.path.getctime)
+    except ValueError:
+        last_download = ""
 
 
 def find_download_button(region=None) -> Box | None:
@@ -53,19 +63,25 @@ def find_download_button(region=None) -> Box | None:
 def click_download_button(download_button_pos: Box, delay: float|int) -> None:
     home = os.path.expanduser('~')
     dl = os.path.join(home, 'Downloads')
-    path_a = dl + "\\*.csv"
+    path = dl + "\\*.csv"
+    x = 0
 
     time.sleep(delay)
     pyautogui.click(download_button_pos)
+    time.sleep(x)
+
     while True:
         try:
-            file = max(glob.glob(path_a), key=os.path.getctime)
-            if os.path.basename(file)[:13] == "multiTimeline":
-                break
-            else:
+            file = max(glob.glob(path), key=os.path.getctime)
+            if file == last_download:
                 raise ValueError
+            else:
+                break
         except ValueError:
+            x += 1
             pyautogui.click(download_button_pos)
+            pyautogui.moveTo(10, 10)
+            time.sleep(x)
     time.sleep(delay)
     pyautogui.hotkey("esc")
     time.sleep(delay)
@@ -79,11 +95,10 @@ def rename_downloads(name: str) -> None:
     download_location = os.path.join(home, 'Downloads')
 
     path = download_location + "\\*.csv"
-    list_of_files = glob.glob(path)
 
     list_of_files = glob.glob(path)
     latest_file = max(list_of_files, key=os.path.getctime)
-    if os.path.basename(latest_file)[:13] == "multiTimeline":
+    if latest_file != last_download:
 
         path = os.path.join(download_location, latest_file)
         try:
@@ -130,13 +145,13 @@ def build_query(target: list[str]) -> list[str]:
                     else:
                         pass
                 else:
-                    if not check_homogenous(target[i:i+5]):
+                    if not check_homogenous(target[i-1:i+5]):
                         processed_query.append(list_to_str(target, i-1, len(target), i))
                     else:
                         pass
     else:
         processed_query.append(list_to_str(target, 0, len(target), 0))
-
+    # print(processed_query)
     return processed_query
 
 
@@ -226,9 +241,6 @@ def compile_final(files: int):
         else:
             os.rename("results.xlsx", home_dir + "\\trendalyzer_results\\results{i}.xlsx".format(i=i))
     return os.path.expanduser('~') + "\\trendalyzer_results"
-
-
-
 def main() -> str:
     global names, targets, total_downloads
     compare = None

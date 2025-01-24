@@ -1,10 +1,11 @@
-import os
+# import os
 # os.environ["KIVY_NO_CONSOLELOG"] = "True"
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
@@ -116,23 +117,37 @@ class QueryBoxLayout(BoxLayout):
         self.size_hint = 1, None
         self.orientation = "vertical"
         self.font_family = "textures\\DMsans.ttf"
-        self.update_queries()
         query_box = self
 
     def update_queries(self):
         for i in range(len(self.children)):
             self.remove_widget(self.children[0])
-        for query in queries:
-            query_text = Button(text=query, color="#7d807d", height=10, background_normal="", on_press=lambda x: self.remove_item(query))
+        for i in range(len(queries)):
+            query_text = QueryBoxLayoutChildButton(i)
             self.add_widget(query_text)
-            self.height += 10
+            self.height = Window.height/20 * len(self.children)
 
     def remove_item(self, query):
         global queries
-        queries.remove(query)
         self.update_queries()
+        self.height = Window.height/20 * len(self.children)
         warning_widget.activate_warning("\"{query}\" successfully removed".format(query=query), "#008b00", critical=False)
 
+
+class QueryBoxLayoutChildButton(Button):
+    def __init__(self, i, **kwargs):
+        super().__init__(**kwargs)
+        self.text = queries[i]
+        self.color = "#7d807d"
+        self.height = Window.height / 15
+        self.y = self.height - Window.height / 15 * i
+        self.background_normal = ""
+        self.on_press = lambda: self.remove_item(queries[i])
+
+    def remove_item(self, query):
+        queries.remove(query)
+        self.parent.remove_widget(self)
+        query_box.remove_item(query)
 
 
 class AddQueryButton(Button):
@@ -459,7 +474,7 @@ class RunButton(Button):
                                         "\n \u2022   [b]Except to fill out any reCAPTCHA(s) due to suspicious activity. "+
                                         "\n(Google trends will give these if they detect you spamming their system)[/b] "+
                                         "\nwhile the program is running. Once you click confirm, this window will freeze and resume "+
-                                        "once search is done. To interrupt search, press [b]CTRL+C[/b]",
+                                        "once search is done. To interrupt search, press CTRL+ALT+DEL -> Task Manager and end this task (It should be called \"main\")",
                                         size_hint=(1, None),
                                         color="#7d807d",
                                         height=Window.height/2,
@@ -490,6 +505,7 @@ class RunButton(Button):
     def do_search(self, *args):
         self.popup.dismiss()
         try:
+            # print(queries)
             save_location = w.main()
             warning_widget.activate_warning("Search complete! Results saved at {sl} (Click to dismiss)".format(sl=save_location), "#008b00", critical=True)
         except IndexError:
@@ -547,13 +563,13 @@ class WarningWidget(Button):
             self.opacity = 0
 
 
-class MainApp(App):
+class TrendalyzerApp(App):
     icon = "textures\\icon.png"
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
 def main():
-    MainApp().run()
+    TrendalyzerApp().run()
 
 
 if __name__ == "__main__":
