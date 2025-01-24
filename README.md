@@ -1,6 +1,9 @@
 # trendalyzer
 Google Trends scraper with Pyautogui, made for lessening my pain the next time I have to gather a buttload of data for some math modelling contest.
 
+<h1>About</h1>
+<p>Made this to lessen my pain while gathering data for some math modelling contest (Cough, HIMCM, Cough), since Google Trends only allows you to compare 5 items at a time. Will still update, so get those suggestions in the Issues page. If you're a Windows user, go grab yourself a copy right now. I promise by the name of every Blahaj ever to be made that this will save you a LOT of pain. <a href=https://github.com/Muyao-Lu/trendalyzer/releases/> Get it here </a></p>
+
 <h1>Useage Instructions</h1>
 
 <h2>Download instructions</h2>
